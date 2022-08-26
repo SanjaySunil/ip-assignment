@@ -1,0 +1,22 @@
+{
+  "name": "ip-assignment",
+  "version": "1.0.0",
+  "description": "IP assignment made easy.",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SanjaySunil/ip-assignment.git"
+  },
+  "author": "Sanjay Sunil",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SanjaySunil/ip-assignment/issues"
+  },
+  "homepage": "https://github.com/SanjaySunil/ip-assignment#readme",
+  "devDependencies": {
+    "jest": "^29.0.1"
+  }
+}
