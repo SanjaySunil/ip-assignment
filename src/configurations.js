@@ -1,4 +1,4 @@
-LINUX_STATIC = `
+exports.LINUX_STATIC = `
 interface {interface}
 static ip_address={ip_address}/24
 #static ip6_address=fd51:42f8:caae:d92e::ff/64
@@ -6,7 +6,7 @@ static routers={gateway}
 static domain_name_servers={gateway}
 `
 
-LINUX_DHCPCD = `
+exports.LINUX_DHCPCD = `
 # A sample configuration for dhcpcd.
 # See dhcpcd.conf(5) for details.
 
@@ -62,5 +62,3 @@ slaac private
 #interface eth0
 #fallback static_eth0
 `
-
-module.exports = LINUX_STATIC, LINUX_DHCPCD;
