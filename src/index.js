@@ -5,6 +5,10 @@ const CONF = require("./configurations");
 const fs = require("fs");
 const util = require("util");
 const write_file = util.promisify(fs.writeFile);
+const read_file = util.promisify(fs.readFile);
+const readline = require('readline');
+
+DHCPCD_CONF_PATH = '/etc/dhcpcd.conf'
 
 String.prototype.format =
   String.prototype.format ||
@@ -25,6 +29,31 @@ String.prototype.format =
     return str;
   };
 
+async function parse_dhcpcd_conf() {
+  const fileStream = fs.createReadStream(DHCPCD_CONF_PATH);
+  let interfaces = ''
+  let edit_mode = false;
+  const rl = readline.createInterface({
+    input: fileStream,
+    crlfDelay: Infinity
+  });
+
+  for await (const line of rl) {
+    console.log(`Line from file: ${line}`);
+    if (line.includes("# START")) {
+      edit_mode = true;
+    } else if (line.includes("# END")) {
+      edit_mode = false;
+    }
+    if (edit_mode == true) {
+      interfaces = interfaces + line + '\n'
+    }
+  }
+  console.log(interfaces)
+}
+
+processLineByLine();
+
 const os_cmd = (cmd) => {
   exec(cmd, (error, stdout, stderr) => {
     if (error) {
@@ -40,36 +69,43 @@ const os_cmd = (cmd) => {
 };
 
 module.exports = {
-  static: (network) => {
+  static: (interfaces) => {
     const platform = process.platform;
 
     switch (platform) {
       case "win32":
-        os_cmd(
-          `netsh interface ipv4 set address name="${network.interface}" static ${network.ip_address} ${network.subnet_mask} ${network.gateway}`
-        );
-        os_cmd(
-          `netsh interface ip set dns name="${network.interface}" static ${network.dns_server}`
-        );
-        os_cmd(
-          `netsh interface ip add dns name="${network.interface}" ${network.alternate_dns_server} INDEX=3`
-        );
+        interfaces.forEach((interface) => {
+          os_cmd(
+            `netsh interface ipv4 set address name="${interface.name}" static ${interface.ip_address} ${interface.subnet_mask} ${interface.gateway}`
+          );
+          os_cmd(
+            `netsh interface ip set dns name="${interface.name}" static ${interface.dns_server}`
+          );
+          os_cmd(
+            `netsh interface ip add dns name="${interface.name}" ${interface.alternate_dns_server} INDEX=3`
+          );
+        });
       case "linux":
-        let linux_static_conf = CONF.LINUX_STATIC.format({
-          interface: network.interface,
-          ip_address: network.ip_address,
-          subnet_mask: network.subnet_mask,
-          gateway: network.gateway,
-          dns_server: network.dns_server,
-        });
-        let linux_dhcpcd_conf = CONF.LINUX_DHCPCD.format({
-          linux_static_conf: linux_static_conf,
-        });
-        const dhcpcd = "/etc/dhcpcd.conf";
-        return write_file(dhcpcd, linux_dhcpcd_conf);
+        parse_dhcpcd_conf()
+        /*
+        interfaces.forEach((interface) => {
+          let linux_static_conf = CONF.LINUX_STATIC.format({
+            interface: interface.interface,
+            ip_address: interface.ip_address,
+            subnet_mask: interface.subnet_mask,
+            gateway: interface.gateway,
+            dns_server: interface.dns_server,
+          });
+          let linux_dhcpcd_conf = CONF.LINUX_DHCPCD.format({
+            interfaces: linux_static_conf,
+          });
+          const dhcpcd = "/etc/dhcpcd.conf";
+          return write_file(dhcpcd, linux_dhcpcd_conf);
+        })
+        */
     }
   },
-  dhcp: (network) => {
+  dhcp: (interfaces) => {
     const platform = process.platform;
 
     switch (platform) {
@@ -80,5 +116,5 @@ module.exports = {
         const dhcpcd = "/etc/dhcpcd.conf";
         return write_file(dhcpcd, linux_dhcpcd_conf);
     }
-  }
+  },
 };
