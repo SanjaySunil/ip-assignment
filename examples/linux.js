@@ -1,4 +1,4 @@
-const interfaces = require("ez-ip");
+const interfaces = require("../src/index");
 
 // This interface has a static IP
 const eth0 = {

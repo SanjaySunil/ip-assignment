@@ -28,7 +28,7 @@ $ npm install {package}
 ### [`examples/linux.js`](./examples/linux.js)
 
 ```js
-const interfaces = require("ez-ip");
+const interfaces = require("ip-assignment");
 
 // This interface has a static IP
 const eth0 = {
