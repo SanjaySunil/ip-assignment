@@ -12,5 +12,9 @@ const eth0 = {
   alternate_dns_server: "8.8.4.4",
 }
 
+const wlan0 = {
+  name: "wlan0",
+}
+
 ip_assignment.set([eth0, wlan0])
 
