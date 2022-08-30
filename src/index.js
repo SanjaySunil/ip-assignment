@@ -4,8 +4,6 @@ const CONF = require("./configurations");
 const fs = require("fs");
 const util = require("util");
 const write_file = util.promisify(fs.writeFile);
-const read_file = util.promisify(fs.readFile);
-const readline = require("readline");
 
 const DHCPCD_CONF_PATH = "/etc/dhcpcd.conf";
 
@@ -43,13 +41,12 @@ const os_cmd = (cmd) => {
 };
 
 module.exports = {
-  static: (interfaces) => {
+  set: (interfaces) => {
     const platform = process.platform;
 
     switch (platform) {
-      /*
       case "win32":
-        interfaces.forEach(interface => {
+        interfaces.forEach((interface) => {
           os_cmd(
             `netsh interface ipv4 set address name="${interface.name}" static ${interface.ip_address} ${interface.subnet_mask} ${interface.gateway}`
           );
@@ -60,10 +57,10 @@ module.exports = {
             `netsh interface ip add dns name="${interface.name}" ${interface.alternate_dns_server} INDEX=3`
           );
         });
-        */
+
       case "linux":
         let linux_dhcpcd_conf = CONF.LINUX_DHCPCD;
-        interfaces.forEach(function (interface) {
+        interfaces.forEach((interface) => {
           let linux_static_conf = CONF.LINUX_STATIC.format({
             interface: interface.name,
             ip_address: interface.ip_address,
@@ -74,34 +71,6 @@ module.exports = {
           linux_dhcpcd_conf = linux_dhcpcd_conf + linux_static_conf;
         });
         return write_file(DHCPCD_CONF_PATH, linux_dhcpcd_conf);
-      /*
-        interfaces.forEach((interface) => {
-          let linux_static_conf = CONF.LINUX_STATIC.format({
-            interface: interface.interface,
-            ip_address: interface.ip_address,
-            subnet_mask: interface.subnet_mask,
-            gateway: interface.gateway,
-            dns_server: interface.dns_server,
-          });
-          let linux_dhcpcd_conf = CONF.LINUX_DHCPCD.format({
-            interfaces: linux_static_conf,
-          });
-          const dhcpcd = "/etc/dhcpcd.conf";
-          return write_file(dhcpcd, linux_dhcpcd_conf);
-        })
-        */
-    }
-  },
-  dhcp: (interfaces) => {
-    const platform = process.platform;
-
-    switch (platform) {
-      case "linux":
-        let linux_dhcpcd_conf = CONF.LINUX_DHCPCD.format({
-          linux_static_conf: "",
-        });
-        const dhcpcd = "/etc/dhcpcd.conf";
-        return write_file(dhcpcd, linux_dhcpcd_conf);
     }
   },
 };

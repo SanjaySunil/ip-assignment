@@ -6,7 +6,7 @@ static ip_address={ip_address}/{subnet_mask}
 static routers={gateway}
 static domain_name_servers={dns_server}
 # END {interface}
-`
+`;
 
 exports.LINUX_DHCPCD = `
 # A sample configuration for dhcpcd.
@@ -50,4 +50,4 @@ require dhcp_server_identifier
 #slaac hwaddr
 # OR generate Stable Private IPv6 Addresses based from the DUID
 slaac private
-`
+`;
