@@ -71,7 +71,7 @@ module.exports = {
             gateway: interface.gateway,
             dns_server: interface.dns_server,
           });
-          linux_dhcpcd_conf = "\n" + linux_dhcpcd_conf + linux_static_conf;
+          linux_dhcpcd_conf = linux_dhcpcd_conf + "\n" + linux_static_conf;
         });
         return write_file(DHCPCD_CONF_PATH, linux_dhcpcd_conf);
       /*
