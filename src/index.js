@@ -57,7 +57,6 @@ module.exports = {
         );
       });
     } else if (platform === "linux") {
-      console.log("here");
       let linux_dhcpcd_conf = CONF.LINUX_DHCPCD;
       interfaces.forEach((interface) => {
         if (interface.ip_address === undefined) {
