@@ -55,8 +55,6 @@ module.exports = {
           `netsh interface ip add dns name="${network.interface}" ${network.alternate_dns_server} INDEX=3`
         );
       case "linux":
-        os_cmd("sudo service dhcpcd start");
-        os_cmd("sudo systemctl enable dhcpcd");
         let linux_static_conf = CONF.LINUX_STATIC.format({
           interface: network.interface,
           ip_address: network.ip_address,
@@ -68,8 +66,7 @@ module.exports = {
           linux_static_conf: linux_static_conf,
         });
         const dhcpcd = "/etc/dhcpcd.conf";
-        write_file(dhcpcd, linux_dhcpcd_conf);
-        os_cmd("sudo systemctl restart networking");
+        return write_file(dhcpcd, linux_dhcpcd_conf);
     }
   },
 };
