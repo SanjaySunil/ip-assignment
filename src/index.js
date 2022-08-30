@@ -1,7 +1,10 @@
 "use strict";
 const { exec } = require("child_process");
-const process = require('process');
-
+const process = require("process");
+const CONF = require("./configurations");
+const fs = require('fs')
+const util = require('util')
+const write_file = util.promisify(fs.writeFile)
 
 String.prototype.format =
   String.prototype.format ||
@@ -40,8 +43,8 @@ module.exports = {
   static: (network) => {
     const platform = process.platform;
 
-    switch(platform) {
-      case 'win32':
+    switch (platform) {
+      case "win32":
         os_cmd(
           `netsh interface ipv4 set address name="${network.interface}" static ${network.ip_address} ${network.subnet_mask} ${network.gateway}`
         );
@@ -51,9 +54,19 @@ module.exports = {
         os_cmd(
           `netsh interface ip add dns name="${network.interface}" ${network.alternate_dns_server} INDEX=3`
         );
-      case 'linux':
-        os_cmd('sudo service dhcpcd start')
-        os_cmd('sudo systemctl enable dhcpcd')
+      case "linux":
+        os_cmd("sudo service dhcpcd start");
+        os_cmd("sudo systemctl enable dhcpcd");
+        let linux_static_conf = CONF.LINUX_STATIC.format({
+          interface: network.interface,
+          ip_address: network.ip_address,
+          gateway: network.gatewaya,
+        });
+        let linux_dhcpcd_conf = CONF.LINUX_DHCPCD.format({
+          linux_static_conf: linux_static_conf
+        })
+        const dhcpcd = '/etc/dhcpcd.conf'
+        return writeFile(dhcpcd, linux_dhcpcd_conf);
     }
   },
 };
