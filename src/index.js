@@ -48,7 +48,8 @@ async function parse_dhcpcd_conf() {
       interfaces = interfaces + line + '\n'
     }
   }
-  console.log(interfaces)
+  
+  return interfaces;
 }
 
 
@@ -71,8 +72,8 @@ module.exports = {
     const platform = process.platform;
 
     switch (platform) {
+      /*
       case "win32":
-        /*
         interfaces.forEach(interface => {
           os_cmd(
             `netsh interface ipv4 set address name="${interface.name}" static ${interface.ip_address} ${interface.subnet_mask} ${interface.gateway}`
