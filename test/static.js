@@ -12,5 +12,14 @@ const eth0 = {
   alternate_dns_server: "8.8.4.4",
 }
 
-ip_assignment.static([eth0])
+const wlan0 = {
+  name: "wlan0",
+  ip_address: "192.168.1.132",
+  subnet_mask: "24",
+  gateway: "192.168.1.1",
+  dns_server: "8.8.8.8",
+  alternate_dns_server: "8.8.4.4",
+}
+
+ip_assignment.static([eth0, wlan0])
 
