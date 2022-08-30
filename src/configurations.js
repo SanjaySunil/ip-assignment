@@ -3,7 +3,7 @@ interface {interface}
 static ip_address={ip_address}/{subnet_mask}
 #static ip6_address=fd51:42f8:caae:d92e::ff/64
 static routers={gateway}
-static domain_name_servers={gateway}
+static domain_name_servers={dns_server}
 `
 
 exports.LINUX_DHCPCD = `

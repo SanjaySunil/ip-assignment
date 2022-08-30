@@ -62,6 +62,7 @@ module.exports = {
           ip_address: network.ip_address,
           subnet_mask: network.subnet_mask,
           gateway: network.gateway,
+          dns_server: network.dns_server,
         });
         let linux_dhcpcd_conf = CONF.LINUX_DHCPCD.format({
           linux_static_conf: linux_static_conf,
