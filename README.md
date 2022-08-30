@@ -5,9 +5,9 @@
     Cross-platform dependency-free IP assignment module
     <br />
     <br />
-    <a href="{report_bug}">Report Bug</a>
+    <a href="https://github.com/SanjaySunil/ez-ip/issues">Report Bug</a>
     ·
-    <a href="{request_feature}">Request Feature</a>
+    <a href="https://github.com/SanjaySunil/ez-ip/issues">Request Feature</a>
   </p>
 </h1>
 <br/><br/>
