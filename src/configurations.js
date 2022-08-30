@@ -49,4 +49,6 @@ require dhcp_server_identifier
 # Generate SLAAC address using the Hardware Address of the interface
 #slaac hwaddr
 # OR generate Stable Private IPv6 Addresses based from the DUID
-slaac private`
+slaac private
+
+`
