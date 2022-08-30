@@ -66,7 +66,7 @@ module.exports = {
           linux_static_conf: linux_static_conf
         })
         const dhcpcd = '/etc/dhcpcd.conf'
-        return writeFile(dhcpcd, linux_dhcpcd_conf);
+        return write_file(dhcpcd, linux_dhcpcd_conf);
     }
   },
 };
