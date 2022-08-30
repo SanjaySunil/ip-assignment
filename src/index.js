@@ -39,7 +39,6 @@ async function parse_dhcpcd_conf() {
   });
 
   for await (const line of rl) {
-    console.log(`Line from file: ${line}`);
     if (line.includes("# START")) {
       edit_mode = true;
     } else if (line.includes("# END")) {
