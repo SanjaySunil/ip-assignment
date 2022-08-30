@@ -2,7 +2,7 @@
 <br/><br/>
 <h1 align="center">ez-ip</h1>
   <p align="center">
-    Cross-platform dependency free IP assignment module
+    Cross-platform dependency-free IP assignment module
     <br />
     <br />
     <a href="{report_bug}">Report Bug</a>

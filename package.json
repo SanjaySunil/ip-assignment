@@ -1,7 +1,7 @@
 {
   "name": "ez-ip",
   "version": "1.0.0",
-  "description": "Cross-platform dependency free IP assignment module",
+  "description": "Cross-platform dependency-free IP assignment module",
   "main": "./src/index.js",
   "scripts": {},
   "repository": {
