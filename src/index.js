@@ -69,4 +69,16 @@ module.exports = {
         return write_file(dhcpcd, linux_dhcpcd_conf);
     }
   },
+  dhcp: (network) => {
+    const platform = process.platform;
+
+    switch (platform) {
+      case "linux":
+        let linux_dhcpcd_conf = CONF.LINUX_DHCPCD.format({
+          linux_static_conf: "",
+        });
+        const dhcpcd = "/etc/dhcpcd.conf";
+        return write_file(dhcpcd, linux_dhcpcd_conf);
+    }
+  }
 };
