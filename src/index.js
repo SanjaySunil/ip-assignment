@@ -86,7 +86,20 @@ module.exports = {
         });
         */
       case "linux":
-        parse_dhcpcd_conf()
+       let parsed_conf = parse_dhcpcd_conf()
+       if (parsed_conf == '') {
+        interfaces.forEach(function(interface) {
+          let linux_static_conf = CONF.LINUX_STATIC.format({
+            interface: interface.interface,
+            ip_address: interface.ip_address,
+            subnet_mask: interface.subnet_mask,
+            gateway: interface.gateway,
+            dns_server: interface.dns_server,
+          });
+          let linux_dhcpcd_conf = CONF.LINUX_DHCPCD + linux_static_conf;
+          return write_file(DHCPCD_CONF_PATH, linux_dhcpcd_conf);
+        })
+       }
         /*
         interfaces.forEach((interface) => {
           let linux_static_conf = CONF.LINUX_STATIC.format({
