@@ -3,7 +3,7 @@ const ip_assignment = require("../src/index");
 // This interface has a static IP
 const eth0 = {
   name: "eth0",
-  ip_address: "192.168.1.33",
+  ip_address: "192.168.1.98",
   subnet_mask: "24",
   gateway: "192.168.1.1",
   dns_server: "8.8.8.8",
