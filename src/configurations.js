@@ -50,5 +50,4 @@ require dhcp_server_identifier
 #slaac hwaddr
 # OR generate Stable Private IPv6 Addresses based from the DUID
 slaac private
-
 `
