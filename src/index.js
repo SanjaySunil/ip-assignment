@@ -5,9 +5,9 @@ const fs = require("fs");
 const util = require("util");
 const write_file = util.promisify(fs.writeFile);
 const read_file = util.promisify(fs.readFile);
-const readline = require('readline');
+const readline = require("readline");
 
-const DHCPCD_CONF_PATH = '/etc/dhcpcd.conf'
+const DHCPCD_CONF_PATH = "/etc/dhcpcd.conf";
 
 String.prototype.format =
   String.prototype.format ||
@@ -27,31 +27,6 @@ String.prototype.format =
     }
     return str;
   };
-
-async function parse_dhcpcd_conf() {
-  const fileStream = fs.createReadStream(DHCPCD_CONF_PATH);
-  let interfaces = ''
-  let edit_mode = false;
-  const rl = readline.createInterface({
-    input: fileStream,
-    crlfDelay: Infinity
-  });
-
-  for await (const line of rl) {
-    if (line.includes("# START")) {
-      edit_mode = true;
-    } else if (line.includes("# END")) {
-      edit_mode = false;
-      interfaces = interfaces + line + '\n'
-    }
-    if (edit_mode == true) {
-      interfaces = interfaces + line + '\n'
-    }
-  }
-  console.log(interfaces)
-  return interfaces;
-}
-
 
 const os_cmd = (cmd) => {
   exec(cmd, (error, stdout, stderr) => {
@@ -87,10 +62,8 @@ module.exports = {
         });
         */
       case "linux":
-       let parsed_conf = parse_dhcpcd_conf()
-       let linux_dhcpcd_conf = CONF.LINUX_DHCPCD;
-       if (parsed_conf == '') {
-        interfaces.forEach(function(interface) {
+        let linux_dhcpcd_conf = CONF.LINUX_DHCPCD;
+        interfaces.forEach(function (interface) {
           let linux_static_conf = CONF.LINUX_STATIC.format({
             interface: interface.name,
             ip_address: interface.ip_address,
@@ -99,11 +72,10 @@ module.exports = {
             dns_server: interface.dns_server,
           });
           linux_dhcpcd_conf = linux_dhcpcd_conf + linux_static_conf;
-          console.log("Added interface.")
-        })
+          console.log("Added interface.");
+        });
         return write_file(DHCPCD_CONF_PATH, linux_dhcpcd_conf);
-       }
-        /*
+      /*
         interfaces.forEach((interface) => {
           let linux_static_conf = CONF.LINUX_STATIC.format({
             interface: interface.interface,
