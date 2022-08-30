@@ -63,4 +63,4 @@ slaac private
 #fallback static_eth0
 `
 
-module.exports = LINUX_STATIC_CONF, LINUX_DHCPCD_CONF;
+module.exports = LINUX_STATIC, LINUX_DHCPCD;

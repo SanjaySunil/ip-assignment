@@ -10,3 +10,4 @@ ipv4.static({
   dns_server: "8.8.8.8",
   alternate_dns_server: "8.8.4.4",
 });
+  
