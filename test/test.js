@@ -5,7 +5,7 @@ const ipv4 = require("../src/index");
 
 ipv4.static({
   interface: "eth0",
-  ip_address: "192.168.1.146",
+  ip_address: "192.168.1.172",
   subnet_mask: "24",
   gateway: "192.168.1.1",
   dns_server: "8.8.8.8",
