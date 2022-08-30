@@ -60,6 +60,7 @@ module.exports = {
         let linux_static_conf = CONF.LINUX_STATIC.format({
           interface: network.interface,
           ip_address: network.ip_address,
+          subnet_mask: network.subnet_mask,
           gateway: network.gateway,
         });
         let linux_dhcpcd_conf = CONF.LINUX_DHCPCD.format({
