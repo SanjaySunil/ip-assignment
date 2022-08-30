@@ -44,39 +44,37 @@ module.exports = {
   set: (interfaces) => {
     const platform = process.platform;
 
-    switch (platform) {
-      case "win32":
-        interfaces.forEach((interface) => {
-          os_cmd(
-            `netsh interface ipv4 set address name="${interface.name}" static ${interface.ip_address} ${interface.subnet_mask} ${interface.gateway}`
-          );
-          os_cmd(
-            `netsh interface ip set dns name="${interface.name}" static ${interface.dns_server}`
-          );
-          os_cmd(
-            `netsh interface ip add dns name="${interface.name}" ${interface.alternate_dns_server} INDEX=3`
-          );
-        });
-
-      case "linux":
-        let linux_dhcpcd_conf = CONF.LINUX_DHCPCD;
-        interfaces.forEach((interface) => {
-          if (interface.ip_address === undefined) {
-          } else {
-            let linux_static_conf = CONF.LINUX_STATIC.format({
-              interface: interface.name,
-              ip_address: interface.ip_address,
-              subnet_mask: interface.subnet_mask,
-              gateway: interface.gateway,
-              dns_server: interface.dns_server,
-            });
-            linux_dhcpcd_conf = linux_dhcpcd_conf + linux_static_conf;
-          }
-        });
-        return write_file(DHCPCD_CONF_PATH, linux_dhcpcd_conf);
-
-      default:
-        console.log("This platform is not supported.")
+    if (platform === "win32") {
+      interfaces.forEach((interface) => {
+        os_cmd(
+          `netsh interface ipv4 set address name="${interface.name}" static ${interface.ip_address} ${interface.subnet_mask} ${interface.gateway}`
+        );
+        os_cmd(
+          `netsh interface ip set dns name="${interface.name}" static ${interface.dns_server}`
+        );
+        os_cmd(
+          `netsh interface ip add dns name="${interface.name}" ${interface.alternate_dns_server} INDEX=3`
+        );
+      });
+    } else if (platform === "linux") {
+      console.log("here");
+      let linux_dhcpcd_conf = CONF.LINUX_DHCPCD;
+      interfaces.forEach((interface) => {
+        if (interface.ip_address === undefined) {
+        } else {
+          let linux_static_conf = CONF.LINUX_STATIC.format({
+            interface: interface.name,
+            ip_address: interface.ip_address,
+            subnet_mask: interface.subnet_mask,
+            gateway: interface.gateway,
+            dns_server: interface.dns_server,
+          });
+          linux_dhcpcd_conf = linux_dhcpcd_conf + linux_static_conf;
+        }
+      });
+      return write_file(DHCPCD_CONF_PATH, linux_dhcpcd_conf);
+    } else {
+      console.log("This platform is not supported.");
     }
   },
 };
