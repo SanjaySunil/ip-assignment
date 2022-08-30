@@ -52,7 +52,6 @@ async function parse_dhcpcd_conf() {
   console.log(interfaces)
 }
 
-processLineByLine();
 
 const os_cmd = (cmd) => {
   exec(cmd, (error, stdout, stderr) => {
