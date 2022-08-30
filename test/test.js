@@ -1,6 +1,6 @@
 const ipv4 = require("../src/index");
 
-ipv4.set({
+ipv4.static({
   name: "Ethernet",
   ip_address: "192.168.1.91",
   subnet_mask: "255.255.255.0",
