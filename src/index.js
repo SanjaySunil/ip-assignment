@@ -74,7 +74,7 @@ module.exports = {
 
     switch (platform) {
       case "win32":
-        interfaces.forEach((interface) => {
+        interfaces.forEach(interface => {
           os_cmd(
             `netsh interface ipv4 set address name="${interface.name}" static ${interface.ip_address} ${interface.subnet_mask} ${interface.gateway}`
           );
