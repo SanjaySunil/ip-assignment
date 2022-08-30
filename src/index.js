@@ -42,6 +42,7 @@ async function parse_dhcpcd_conf() {
       edit_mode = true;
     } else if (line.includes("# END")) {
       edit_mode = false;
+      interfaces = interfaces + line + '\n'
     }
     if (edit_mode == true) {
       interfaces = interfaces + line + '\n'
@@ -86,18 +87,20 @@ module.exports = {
         */
       case "linux":
        let parsed_conf = parse_dhcpcd_conf()
+       let linux_dhcpcd_conf = CONF.LINUX_DHCPCD;
        if (parsed_conf == '') {
         interfaces.forEach(function(interface) {
           let linux_static_conf = CONF.LINUX_STATIC.format({
-            interface: interface.interface,
+            interface: interface.name,
             ip_address: interface.ip_address,
             subnet_mask: interface.subnet_mask,
             gateway: interface.gateway,
             dns_server: interface.dns_server,
           });
-          let linux_dhcpcd_conf = CONF.LINUX_DHCPCD + linux_static_conf;
-          return write_file(DHCPCD_CONF_PATH, linux_dhcpcd_conf);
+          linux_dhcpcd_conf = linux_dhcpcd_conf + linux_static_conf;
+          console.log("Added interface.")
         })
+        return write_file(DHCPCD_CONF_PATH, linux_dhcpcd_conf);
        }
         /*
         interfaces.forEach((interface) => {
