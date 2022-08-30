@@ -1,6 +1,6 @@
 const { exec } = require("child_process");
 const process = require("process");
-const CONF = require("./configurations");
+const CONF = require("./templates/dhcpcd");
 const fs = require("fs");
 const util = require("util");
 const write_file = util.promisify(fs.writeFile);

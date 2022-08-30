@@ -1,16 +1,17 @@
 {
   "name": "ip-assignment",
   "version": "1.0.0",
-  "description": "IP assignment made easy.",
+  "description": "Cross-platform dependency free IP assignment module",
   "main": "./src/index.js",
-  "scripts": {
-    "test": "jest"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SanjaySunil/ip-assignment.git"
   },
-  "author": "Sanjay Sunil",
+  "author": {
+    "name": "Sanjay Sunil",
+    "email": "sanjaysunil@protonmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/SanjaySunil/ip-assignment/issues"
