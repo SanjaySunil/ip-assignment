@@ -1,4 +1,4 @@
-const ip_assignment = require("../src/index");
+const interfaces = require("ez-ip");
 
 // This interface has a static IP
 const eth0 = {
@@ -15,4 +15,4 @@ const wlan0 = {
   name: "wlan0",
 };
 
-ip_assignment.set([eth0, wlan0]);
+interfaces.set([eth0, wlan0]);

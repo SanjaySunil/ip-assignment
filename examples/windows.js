@@ -1,4 +1,4 @@
-const ip_assignment = require("../src/index");
+const interfaces = require("../src/index");
 
 // This interface has a static IP
 const Ethernet = {
@@ -10,4 +10,4 @@ const Ethernet = {
   alternate_dns_server: "8.8.4.4",
 };
 
-ip_assignment.set([Ethernet]);
+interfaces.set([Ethernet]);
