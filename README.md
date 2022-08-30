@@ -1,26 +1,26 @@
 <!-- Header -->
 <br/><br/>
-<h1 align="center">ez-ip</h1>
+<h1 align="center">ip-assignment</h1>
   <p align="center">
     Cross-platform dependency-free IP assignment module
     <br />
     <br />
-    <a href="https://github.com/SanjaySunil/ez-ip/issues">Report Bug</a>
+    <a href="https://github.com/SanjaySunil/ip-assignment/issues">Report Bug</a>
     ·
-    <a href="https://github.com/SanjaySunil/ez-ip/issues">Request Feature</a>
+    <a href="https://github.com/SanjaySunil/ip-assignment/issues">Request Feature</a>
   </p>
 </h1>
 <br/><br/>
 
 <!-- Description -->
-## What's ez-ip?
+## What's ip-assignment?
 
-[ez-ip]() is a cross-platform dependency free ip-assignment module. With ez-ip, you can easily configure network interfaces in your own projects.
+[ip-assignment]() is a cross-platform dependency free ip-assignment module. With ip-assignment, you can easily configure network interfaces in your own projects.
 
 <!-- Install -->
 ## Install
 ```sh
-$ npm install ez-ip
+$ npm install ip-assignment
 ```
 
 ## Usage
@@ -28,7 +28,7 @@ $ npm install ez-ip
 ### [`examples/linux.js`](./examples/linux.js)
 
 ```js
-const interfaces = require("ez-ip");
+const interfaces = require("ip-assignment");
 
 // This interface has a static IP
 const eth0 = {
