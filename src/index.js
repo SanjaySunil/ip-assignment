@@ -1,4 +1,3 @@
-"use strict";
 const { exec } = require("child_process");
 const process = require("process");
 const CONF = require("./configurations");
