@@ -61,14 +61,17 @@ module.exports = {
       case "linux":
         let linux_dhcpcd_conf = CONF.LINUX_DHCPCD;
         interfaces.forEach((interface) => {
-          let linux_static_conf = CONF.LINUX_STATIC.format({
-            interface: interface.name,
-            ip_address: interface.ip_address,
-            subnet_mask: interface.subnet_mask,
-            gateway: interface.gateway,
-            dns_server: interface.dns_server,
-          });
-          linux_dhcpcd_conf = linux_dhcpcd_conf + linux_static_conf;
+          if (interface.ip_address === undefined) {
+          } else {
+            let linux_static_conf = CONF.LINUX_STATIC.format({
+              interface: interface.name,
+              ip_address: interface.ip_address,
+              subnet_mask: interface.subnet_mask,
+              gateway: interface.gateway,
+              dns_server: interface.dns_server,
+            });
+            linux_dhcpcd_conf = linux_dhcpcd_conf + linux_static_conf;
+          }
         });
         return write_file(DHCPCD_CONF_PATH, linux_dhcpcd_conf);
     }
