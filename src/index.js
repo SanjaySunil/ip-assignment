@@ -74,6 +74,7 @@ module.exports = {
 
     switch (platform) {
       case "win32":
+        /*
         interfaces.forEach(interface => {
           os_cmd(
             `netsh interface ipv4 set address name="${interface.name}" static ${interface.ip_address} ${interface.subnet_mask} ${interface.gateway}`
@@ -85,6 +86,7 @@ module.exports = {
             `netsh interface ip add dns name="${interface.name}" ${interface.alternate_dns_server} INDEX=3`
           );
         });
+        */
       case "linux":
         parse_dhcpcd_conf()
         /*
