@@ -74,6 +74,9 @@ module.exports = {
           }
         });
         return write_file(DHCPCD_CONF_PATH, linux_dhcpcd_conf);
+
+      default:
+        console.log("This platform is not supported.")
     }
   },
 };
