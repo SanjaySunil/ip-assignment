@@ -2,9 +2,9 @@
 const { exec } = require("child_process");
 const process = require("process");
 const CONF = require("./configurations");
-const fs = require('fs')
-const util = require('util')
-const write_file = util.promisify(fs.writeFile)
+const fs = require("fs");
+const util = require("util");
+const write_file = util.promisify(fs.writeFile);
 
 String.prototype.format =
   String.prototype.format ||
@@ -63,10 +63,11 @@ module.exports = {
           gateway: network.gateway,
         });
         let linux_dhcpcd_conf = CONF.LINUX_DHCPCD.format({
-          linux_static_conf: linux_static_conf
-        })
-        const dhcpcd = '/etc/dhcpcd.conf'
-        return write_file(dhcpcd, linux_dhcpcd_conf);
+          linux_static_conf: linux_static_conf,
+        });
+        const dhcpcd = "/etc/dhcpcd.conf";
+        write_file(dhcpcd, linux_dhcpcd_conf);
+        os_cmd("sudo systemctl restart networking");
     }
   },
 };
