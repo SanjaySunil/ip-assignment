@@ -48,7 +48,7 @@ async function parse_dhcpcd_conf() {
       interfaces = interfaces + line + '\n'
     }
   }
-  
+  console.log(interfaces)
   return interfaces;
 }
 
