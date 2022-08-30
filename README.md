@@ -51,7 +51,7 @@ interfaces.set([eth0, wlan0]);
 ### [`examples/windows.js`](./examples/windows.js)
 
 ```js
-const interfaces = require("../src/index");
+const interfaces = require("ip-assignment");
 
 // This interface has a static IP
 const Ethernet = {
