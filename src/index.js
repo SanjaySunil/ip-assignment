@@ -8,7 +8,7 @@ const write_file = util.promisify(fs.writeFile);
 const read_file = util.promisify(fs.readFile);
 const readline = require('readline');
 
-DHCPCD_CONF_PATH = '/etc/dhcpcd.conf'
+const DHCPCD_CONF_PATH = '/etc/dhcpcd.conf'
 
 String.prototype.format =
   String.prototype.format ||
