@@ -1,22 +1,23 @@
 {
-  "name": "ip-assignment",
+  "name": "ez-ip",
   "version": "1.0.0",
-  "description": "IP assignment made easy.",
+  "description": "Cross-platform dependency-free IP assignment module",
   "main": "./src/index.js",
-  "scripts": {
-    "test": "jest"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SanjaySunil/ip-assignment.git"
+    "url": "git+https://github.com/SanjaySunil/ez-ip.git"
   },
-  "author": "Sanjay Sunil",
+  "author": {
+    "name": "Sanjay Sunil",
+    "email": "sanjaysunil@protonmail.com"
+  },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SanjaySunil/ip-assignment/issues"
+    "url": "https://github.com/SanjaySunil/ez-ip/issues"
   },
-  "homepage": "https://github.com/SanjaySunil/ip-assignment#readme",
+  "homepage": "https://github.com/SanjaySunil/ez-ip#readme",
   "devDependencies": {
-    "jest": "^29.0.1"
+    "readme-components": "^1.0.0"
   }
 }
